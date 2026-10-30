@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Monitoramento das condições do solo e do ambiente por sensores.">
+    <title>Monitoramento do solo vivo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div id="container">
+        <main>
+            <section class="introducao">
+                <h1>Monitoramento do solo vivo</h1>
+                <p>
+                    Este site permite acompanhar as condições do solo e do ambiente por meio dos dados coletados
+                    pelos sensores, como umidade, temperatura e luminosidade. Além disso, apresenta a leitura mais
+                    recente, ajudando o agricultor a entender melhor as necessidades da plantação e a controlar a irrigação.
+                </p>
+            </section>
+
+            <div class="status-conexao" aria-live="polite">
+                <span id="indicadorConexao" class="indicador offline"></span>
+                <span id="statusConexao">Aguardando dados do ESP32...</span>
+                <span id="ultimaAtualizacao"></span>
+            </div>
+
+            <section id="cards">
+                <article class="card">
+                    <div class="card-titulo">
+                        <img src="http://localhost:3000/img/icons8-temperatura-48.png" alt="" class="icone">
+                        <h2 title="Temperatura medida pelo sensor">Temperatura</h2>
+                    </div>
+                    <div class="units">
+                        <div class="unit">
+                            <span class="unidade">°C</span>
+                            <strong id="temperaturaC">--</strong>
+                        </div>
+                        <span class="separador">|</span>
+                        <div class="unit">
+                            <span class="unidade">°F</span>
+                            <strong id="temperaturaF">--</strong>
+                        </div>
+                        <span class="separador">|</span>
+                        <div class="unit">
+                            <span class="unidade">K</span>
+                            <strong id="temperaturaK">--</strong>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-titulo">
+                        <img src="img/umidade.png" alt="" class="icone">
+                        <h2 title="Quantidade relativa de vapor de água no ar">Umidade do ar</h2>
+                    </div>
+                    <div class="valor-principal">
+                        <strong id="umidadeAr">--</strong>
+                        <span class="unidade">%</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-titulo">
+                        <img src="img/plantar.png" alt="" class="icone">
+                        <h2 title="Leitura analógica do sensor de umidade do solo">Umidade do solo</h2>
+                    </div>
+                    <div class="valor-principal">
+                        <strong id="umidadeSolo">--</strong>
+                        <span class="unidade">ADC</span>
+                    </div>
+                    <p class="observacao">Leitura bruta do sensor (0 a 4095). Calibração necessária para converter em %.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-titulo">
+                        <img src="img/brilho.png" alt="" class="icone">
+                        <h2 title="Leitura do sensor de luminosidade">Luminosidade</h2>
+                    </div>
+                    <div class="valor-principal">
+                        <strong id="luminosidade">--</strong>
+                        <span class="unidade">ADC</span>
+                    </div>
+                    <p class="observacao">Leitura analógica (0 a 4095). É necessário calibrar para estimar lux.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-titulo">
+                        <img src="img/valvula.png" alt="" class="icone">
+                        <h2 title="Estado do sistema de irrigação">Estado da válvula</h2>
+                    </div>
+                    <p class="estado neutro" id="estadoValvula">Não configurada</p>
+                    <p class="observacao">O ESP32 ainda não envia o estado da válvula.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-titulo">
+                        <img src="img/fogueira.png" alt="" class="icone">
+                        <h2 title="Indica se o sensor detectou chama">Alerta de chama</h2>
+                    </div>
+                    <p class="estado neutro" id="alertaChama">Aguardando dados...</p>
+                </article>
+            </section>
+
+            <p class="rodape">
+                Os valores são atualizados automaticamente. As leituras analógicas precisam ser calibradas
+                antes de serem apresentadas como porcentagem ou unidades físicas.
+            </p>
+        </main>
+    </div>
+</body>
+
+</html>
