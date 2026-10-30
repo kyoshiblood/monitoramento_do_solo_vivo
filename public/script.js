@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:3000/api/dados";
-
+const API_URL = "https://monitoramento-solo.onrender.com/api/dados";
 const elemento = (id) => document.getElementById(id);
 
 function mostrarStatus(conectado, mensagem) {
